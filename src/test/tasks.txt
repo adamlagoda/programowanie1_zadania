@@ -1,3 +1,6 @@
 CONSUMER:
 1. Zaimplementuj Consumera, który wyświetli tekst na standardowe wyjście aplikacji.
 2. Implementacja zapisu do pliku przekazanego w Stringa. Wykorzystaj klasę PrintWriter.
+
+PREDICATE
+1. Predykat, który zweryfikuje, czy podany łańcuch zawiera polskie znaki.
