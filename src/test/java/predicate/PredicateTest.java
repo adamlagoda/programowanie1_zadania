@@ -41,12 +41,4 @@ public class PredicateTest {
         assertFalse(containsPolishCharacters.test(nonContainingPolishChars));
     }
 
-    @Test
-    @Disabled
-    public void containsPolishCharactersTest() {
-        Predicate<String> containsPolishCharacters;
-
-        assertTrue(containsPolishCharacters.test(containingPolishChars));
-        assertFalse(containsPolishCharacters.test(nonContainingPolishChars));
-    }
 }
