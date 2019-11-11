@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,38 +20,29 @@ public class ConsumerTest {
     }
 
     @Test
+    @Disabled
     public void displayStringConsumerTestLambda() {
-        Consumer<String> stringConsumer = s -> System.out.print(s);
-        stringConsumer.accept(outputString);
 
         assertEquals(outputString, out.toString());
     }
 
     @Test
+    @Disabled
     public void displayStringConsumerTestAnonymousClass() {
-        Consumer<String> stringConsumer = new Consumer<String>() {
-            @Override
-            public void accept(String s) {
-                System.out.print(s);
-            }
-        };
-        stringConsumer.accept(outputString);
 
         assertEquals(outputString, out.toString());
     }
 
     @Test
+    @Disabled
     public void displayStringConsumerTestMethodReference() {
-        Consumer<String> stringConsumer = System.out::print;
-        stringConsumer.accept(outputString);
 
         assertEquals(outputString, out.toString());
     }
 
     @Test
+    @Disabled
     public void displayStringConsumerTestImplementation() {
-        Consumer<String> stringConsumer = new DisplayStringConsumer();
-        stringConsumer.accept(outputString);
 
         assertEquals(outputString, out.toString());
     }
