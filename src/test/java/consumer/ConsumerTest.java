@@ -1,16 +1,16 @@
 package consumer;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.util.Scanner;
 import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConsumerTest {
 
+    private final String filename = "consumed.txt";
     private final String outputString = "Output message";
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -57,4 +57,65 @@ public class ConsumerTest {
         assertEquals(outputString, out.toString());
     }
 
+    @Test
+    public void writeToFileConsumerLambda() {
+        Consumer<String> stringConsumer = s -> {
+            try (PrintWriter printWriter = new PrintWriter(new FileWriter(filename))) {
+                printWriter.println(s);
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        };
+
+        stringConsumer.accept(outputString);
+
+        checkReadStringEqualsWritten();
+    }
+
+    @Test
+    public void writeToFileConsumerTestAnonymousClass() {
+        Consumer<String> stringConsumer = new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                try (PrintWriter printWriter = new PrintWriter(new FileWriter(filename))) {
+                    printWriter.println(s);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            }
+        };
+        stringConsumer.accept(outputString);
+
+        checkReadStringEqualsWritten();
+    }
+
+    @Test
+    public void writeToFileConsumerTestMethodReference() throws IOException {
+        PrintWriter printWriter = new PrintWriter(new FileWriter(filename));
+        Consumer<String> stringConsumer = printWriter::println;
+
+        stringConsumer.accept(outputString);
+        printWriter.close();
+
+        checkReadStringEqualsWritten();
+    }
+
+    @Test
+    public void writeToFileConsumerTestImplementation() {
+        Consumer<String> stringConsumer = new WriteToFileConsumer(filename);
+        stringConsumer.accept(outputString);
+
+        checkReadStringEqualsWritten();
+    }
+
+    private void checkReadStringEqualsWritten() {
+        try {
+            FileReader fileReader = new FileReader(filename);
+            Scanner scanner = new Scanner(fileReader);
+            scanner.useDelimiter("\n");
+            assertEquals(outputString, scanner.next());
+        } catch (FileNotFoundException exception) {
+            exception.printStackTrace();
+        }
+    }
 }
