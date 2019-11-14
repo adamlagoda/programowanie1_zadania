@@ -12,12 +12,22 @@ public class PredicateTest {
 
     private final String containingPolishChars = "Dżawa";
     private final String nonContainingPolishChars = "Java";
-    private final User userWithOnePhone = new User();
-    private final User userWithMultiplePhones = new User();
+    private User userWithOnePhone;
+    private User userWithMultiplePhones;
     private final char[] polishCharacters = {'ą', 'ć', 'ę', 'ł', 'ń', 'ó', 'ś', 'ż', 'ź'};
 
+    private PredicateTest() {
+        userWithMultiplePhones = new User("user with multiple phones");
+        userWithOnePhone = new User("user with one phone");
+
+        Phone phone1 = new Phone("+48 123 456 789");
+        Phone phone2 = new Phone("+48 987 654 321");
+
+        userWithOnePhone.setPhones(new Phone[]{phone1});
+        userWithMultiplePhones.setPhones(new Phone[]{phone1, phone2});
+    }
+
     @Test
-    @Disabled
     public void containsPolishCharactersTestLambda() {
         Predicate<String> containsPolishCharacters = s ->
                 s.chars()
@@ -33,7 +43,6 @@ public class PredicateTest {
     }
 
     @Test
-    @Disabled
     public void containsPolishCharactersTestAnonymousClass() {
         Predicate<String> containsPolishCharacters = new Predicate<String>() {
             @Override
@@ -52,7 +61,6 @@ public class PredicateTest {
     }
 
     @Test
-    @Disabled
     public void containsPolishCharactersTestImplementation() {
         Predicate<String> containsPolishCharacters = new ConstainsPolishCharactersPredicate();
 
@@ -61,27 +69,29 @@ public class PredicateTest {
     }
 
     @Test
-    @Disabled
     public void hasMoreThanOnePhoneTestLambda() {
-        Predicate<User> hasMoreThanOnePhone = null;
+        Predicate<User> hasMoreThanOnePhone = u -> u.getPhones().length > 1;
 
         assertTrue(hasMoreThanOnePhone.test(userWithMultiplePhones));
         assertFalse(hasMoreThanOnePhone.test(userWithOnePhone));
     }
 
     @Test
-    @Disabled
     public void hasMoreThanOnePhoneTestAnonymousClass() {
-        Predicate<User> hasMoreThanOnePhone = null;
+        Predicate<User> hasMoreThanOnePhone = new Predicate<User>() {
+            @Override
+            public boolean test(User user) {
+                return user.getPhones().length > 1;
+            }
+        };
 
         assertTrue(hasMoreThanOnePhone.test(userWithMultiplePhones));
         assertFalse(hasMoreThanOnePhone.test(userWithOnePhone));
     }
 
     @Test
-    @Disabled
     public void hasMoreThanOnePhoneTestImplementation() {
-        Predicate<User> hasMoreThanOnePhone = null;
+        Predicate<User> hasMoreThanOnePhone = new HasMoreThanOnePhoneNumbers();
 
         assertTrue(hasMoreThanOnePhone.test(userWithMultiplePhones));
         assertFalse(hasMoreThanOnePhone.test(userWithOnePhone));
