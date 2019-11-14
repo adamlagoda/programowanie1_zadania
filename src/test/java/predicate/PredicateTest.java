@@ -1,6 +1,5 @@
 package predicate;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.function.Predicate;
