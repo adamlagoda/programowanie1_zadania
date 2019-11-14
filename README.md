@@ -8,3 +8,6 @@ nie zagłębiając się w szczegóły:
 Aby utuchomić test należy: kliknąć prawym przyciskiem na metodę i wybrać z menu "Run [nazwa_metody]",
 lub kliknąć ikonę na marginesie po lewej stronie, lub użyć skrótu klawiatourowego: Ctrl + Shift + F10
 Good luck!
+
+Update: Zadania z predykatów i consumera zawierają szablony testów dla różnych metod implementacji.
+W dalszych zadaniach wykorzystaj dowolny wybrany przez siebie sposób.

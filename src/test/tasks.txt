@@ -4,3 +4,4 @@ CONSUMER:
 
 PREDICATE
 1. Predykat, który zweryfikuje, czy podany łańcuch zawiera polskie znaki.
+2. Sprawdzenie, czy użytkownik posiada więcej niż 1 numery telefonu (należy utworzyć odpowiednie klasy)
