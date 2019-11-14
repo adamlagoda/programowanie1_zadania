@@ -3,9 +3,7 @@ package predicate;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,8 +12,13 @@ public class PredicateTest {
 
     private final String containingPolishChars = "Dżawa";
     private final String nonContainingPolishChars = "Java";
-    private final User userWithOnePhone = new User();
-    private final User userWithMultiplePhones = new User();
+    private final User userWithOnePhone;
+    private final User userWithMultiplePhones;
+
+    public PredicateTest() {
+        userWithOnePhone = new User();
+        userWithMultiplePhones = new User();
+    }
 
     @Test
     @Disabled

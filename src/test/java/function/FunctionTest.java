@@ -1,9 +1,10 @@
 package function;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import predicate.Phone;
 import predicate.User;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -17,24 +18,31 @@ public class FunctionTest {
     private final User user;
 
     public FunctionTest() {
-        user = new User();
+        user = new User("Zygmunt");
+        Phone phone = new Phone("+48 123 456 789");
+        user.setPhones(new Phone[]{phone});
     }
 
     @Test
-    @Disabled
     public void testToUppercaseFunction() {
-        Function<String, String> toUppercase = s -> null;
+        Function<String, String> toUppercase = s -> s.toUpperCase();
 
         Pattern onlySmallLetters = Pattern.compile("[a-z]+");
         assertFalse(onlySmallLetters.matcher(toUppercase.apply(lowerCase)).find());
     }
 
     @Test
-    @Disabled
     public void testToListOfPhoneNumbersFunction() {
-        Function<?, ?> listOfPhoneNumbers = null;
+        Function<User, List<String>> listOfPhoneNumbers = u -> {
+            List<String> nameWithPhones = new LinkedList<>();
+            for (Phone phone : u.getPhones()) {
+                String nameWithPhone = u.getName() + " - " + phone.getNumber();
+                nameWithPhones.add(nameWithPhone);
+            }
+            return nameWithPhones;
+        };
 
-        List<String> resultList = null;
+        List<String> resultList = listOfPhoneNumbers.apply(user);
 
         assertTrue(resultList.stream()
                 .anyMatch(s -> s.equals(userWithPhoneNumber)));
