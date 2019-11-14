@@ -2,6 +2,10 @@ CONSUMER:
 1. Zaimplementuj Consumera, który wyświetli tekst na standardowe wyjście aplikacji.
 2. Implementacja zapisu do pliku przekazanego w Stringa. Wykorzystaj klasę PrintWriter.
 
-PREDICATE
+PREDICATE:
 1. Predykat, który zweryfikuje, czy podany łańcuch zawiera polskie znaki.
 2. Sprawdzenie, czy użytkownik posiada więcej niż 1 numery telefonu (należy utworzyć odpowiednie klasy)
+
+FUNCTION:
+1. Funkcja, która zamieni dowolny tekst na pisany wielkimi literami
+2. Funkcja, która z obiektu użytkownika utworzy listę elementów w postaci: "[name] - [phone_number]"
