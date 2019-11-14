@@ -32,7 +32,7 @@ public class FunctionTest {
     @Test
     @Disabled
     public void testToListOfPhoneNumbersFunction() {
-        Function<String, String> listOfPhoneNumbers = null;
+        Function<?, ?> listOfPhoneNumbers = null;
 
         List<String> resultList = null;
 
